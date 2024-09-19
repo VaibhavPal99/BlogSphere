@@ -41,9 +41,7 @@ export const userRouter = new Hono<{
   
   
       const token = await sign({ id: user.id }, c.env.SECRET_KEY);
-      return c.json({
-        jwt :{token},
-      });
+      return c.json({jwt : token});;
     } catch (e) {
       console.log(e);
       c.status(403);
