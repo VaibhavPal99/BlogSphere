@@ -44,6 +44,7 @@ export const Auth = () => {
                             ...postInputs,
                             name: e.target.value,
                         })
+                        localStorage.setItem("name",e.target.value);
                     }}
                     ></LabelledInput>
                     <LabelledInput label="Email" placeholder="johndoe@gmail.com" onChange={(e)=>{
