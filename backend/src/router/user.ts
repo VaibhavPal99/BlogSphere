@@ -20,7 +20,6 @@ export const userRouter = new Hono<{
     }).$extends(withAccelerate());
   
     const body = await c.req.json();
-    console.log(body);
     const {success} = signupInput.safeParse(body);
 
     if(!success){
@@ -48,6 +47,9 @@ export const userRouter = new Hono<{
       return c.text("Not able to signup");
     }
   });
+
+
+
   
  userRouter.post("/signin", async (c) => {
     const prisma = new PrismaClient({
@@ -77,6 +79,8 @@ export const userRouter = new Hono<{
           error: "User not found",
         });
       }
+      console.log(user);
+      // const query = `{SELECT * FROM users WHERE email = ${body.email}}`;
   
       const jwt = await sign(
         {
@@ -85,7 +89,7 @@ export const userRouter = new Hono<{
         c.env.SECRET_KEY
       );
   
-      return c.json({jwt :jwt});
+      return c.json({jwt: jwt, name: user.name});
     } catch (e) {
       console.log(e);
       return c.json({

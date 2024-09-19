@@ -17,10 +17,13 @@ export const Auth2 = () => {
             const response = await  axios.post(`${BACKEND_URL}/api/v1/user/signin`,postInputs);
             console.log(response);
             const jwt = response.data.jwt;
+            const name= response.data.name;
             localStorage.setItem("token",jwt);
+            localStorage.setItem("name",name);
+
             navigate("/blogs")
         }catch(e){
-            alert("An Error has occurred");
+            alert("Not able to Log in");
         }
 
     }
