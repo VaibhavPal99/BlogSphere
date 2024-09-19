@@ -7,6 +7,7 @@ import { Publish } from './components/Publish'
 
 
 import './App.css'
+import { Landing } from './pages/Landing'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/blog/:id" element={<Blog></Blog>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/publish" element={<Publish></Publish>}></Route>
+        <Route path="/" element={<Landing></Landing>}></Route>
       </Routes>
       </BrowserRouter>
     </div>
