@@ -11,7 +11,6 @@ export const blogRouter = new Hono<{
   };
   Variables: {
     userId: string;
-    id: string;
   };
 }>();
 
@@ -71,6 +70,7 @@ blogRouter.post("/", async (c) => {
 });
 
 blogRouter.put("/", async (c) => {
+
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
@@ -166,3 +166,5 @@ blogRouter.get("/:id", async (c) => {
     });
   }
 });
+
+

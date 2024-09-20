@@ -4,10 +4,8 @@ import {Signin} from './pages/Signin'
 import {Blog} from './pages/Blog'
 import {Blogs} from './pages/Blogs'
 import { Publish } from './components/Publish'
-
-
-import './App.css'
 import { Landing } from './pages/Landing'
+import { User } from './pages/User'
 
 
 function App() {
@@ -24,6 +22,7 @@ function App() {
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/publish" element={<Publish></Publish>}></Route>
         <Route path="/" element={<Landing></Landing>}></Route>
+        <Route path="/user/:id" element={<User></User>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

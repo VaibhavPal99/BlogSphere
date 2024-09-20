@@ -15,6 +15,7 @@ export const Auth = () => {
 
     async function sendRequest(){
         try{
+            console.log(postInputs);
             const response = await  axios.post(`${BACKEND_URL}/api/v1/user/signup`,postInputs);
             console.log(response);
             const jwt = response.data.jwt;

@@ -19,8 +19,13 @@ export const Auth2 = () => {
             const jwt = response.data.jwt;
             const name= response.data.name;
             localStorage.setItem("token",jwt);
+            const val="Anonymous";
+            if(!name)
+            localStorage.setItem("name",val);
+            else
             localStorage.setItem("name",name);
 
+            
             navigate("/blogs")
         }catch(e){
             alert("Not able to Log in");

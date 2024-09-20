@@ -1,9 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode"
+
+interface Custom {
+  id: string;
+}
 
 export const BarAvatar = ({ name }: { name: string }) => {
   const [isDrop, setIsDrop] = useState(false);
   const navigate = useNavigate();
+  
+  const token = localStorage.getItem('token') || " ";
+  const decoded = jwtDecode<Custom>(token);
+  const id = decoded.id || " ";
+  localStorage.setItem('authorId',id);
+
+
 
   const toggleDrop = () => {
     setIsDrop(!isDrop);
@@ -13,6 +25,11 @@ export const BarAvatar = ({ name }: { name: string }) => {
     localStorage.clear();
     navigate("/");
  };
+ 
+
+  const Profile = () => {
+    navigate(`/user/${id}`);
+  }
 
   return (
     <div className="relative inline-block">
@@ -32,6 +49,9 @@ export const BarAvatar = ({ name }: { name: string }) => {
           className="absolute right-0 mt-2 w-44 divide-y divide-gray-100 rounded-md shadow  bg-white"
         >
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-900 font-semibold">
+            <li className="block px-4 py-2 cursor-pointer">
+              <button onClick={Profile}>Profile</button>
+            </li>
             <li className="block px-4 py-2 cursor-pointer">
               <button onClick={logout}>Sign out</button>
             </li>

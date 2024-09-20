@@ -9,7 +9,44 @@ export const userRouter = new Hono<{
     DATABASE_URL: string;
     SECRET_KEY: string;
   };
+  Variables: {
+    userId: string;
+  };
 }>();
+
+
+userRouter.use("/*", async (c, next) => {
+ 
+  const authheader = c.req.header("Authorization") || " ";
+
+  const isPublicRoute = c.req.path === '/api/v1/user/signup' || c.req.path === '/api/v1/user/signin';
+
+  if (isPublicRoute) {
+    // Skip authentication for public routes
+    console.log("Failing to connect");
+    await next();
+    return;
+  }
+
+  try {
+    const user = (await verify(authheader, c.env.SECRET_KEY)) as { id: string };
+
+    if (user) {
+      c.set("userId", user.id);
+      await next();
+    } else {
+      c.status(403);
+      return c.json({
+        msg: "wrong jwt sent, you are not an authorized user!",
+      });
+    }
+  } catch (e) {
+    c.status(403);
+    return c.json({
+      msg: "An exception has occured while fetching you request",
+    });
+  }
+});
 
 
 
@@ -97,4 +134,44 @@ export const userRouter = new Hono<{
       });
     }
   });
+
+  userRouter.get('/:id', async (c) => {
+
+
+    try {
+      const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+      }).$extends(withAccelerate());
+  
+      const id = c.req.param("id");
+  
+      const blogs = await prisma.post.findMany({
+        where: {
+          authorId: id,
+        },
+        select: {
+          id: true,
+          title: true,
+          content: true,
+          author: {
+            select: {
+              name: true
+            }
+          }
+  
+        }
+      });
+  
+      return c.json({
+        blogs,
+      });
+    } catch (e) {
+      c.status(411);
+      return c.json({
+        msg: "Error while fetching the blog post",
+      });
+    }
+
+
+  })
   
