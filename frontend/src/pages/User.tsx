@@ -3,7 +3,7 @@ import { useDetails } from "../hooks";
 import { BlogCard } from "../components/BlogCard";
 import { Skeleton } from "../components/Skeleton";
 import { useState } from "react";
-import { DetailCard } from "../components/Detailcard";
+import { DetailCard } from "../components/DetailCard";
 
 export const User = () => {
     const name = localStorage.getItem("name") || "Anonymous";
