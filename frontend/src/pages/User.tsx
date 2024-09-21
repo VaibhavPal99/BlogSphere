@@ -2,6 +2,8 @@ import { Appbar } from "../components/Appbar";
 import { useDetails } from "../hooks";
 import { BlogCard } from "../components/BlogCard";
 import { Skeleton } from "../components/Skeleton";
+import { useState } from "react";
+import { DetailCard } from "../components/Detailcard";
 
 export const User = () => {
     const name = localStorage.getItem("name") || "Anonymous";
@@ -10,7 +12,27 @@ export const User = () => {
      console.log(id);
 
     // Fetch blogs and loading state using the id
-    const { blogs, loading } = useDetails({ id });
+    const { blogs, details, loading } = useDetails({ id });
+    console.log(blogs);
+   
+
+    const [isDrop, setIsDrop] = useState(true);
+    const [isDrop2,setIsDrop2] = useState(false);
+
+    const toggler1 = () => {
+        if(isDrop===false){
+        setIsDrop(!isDrop);
+        setIsDrop2(!isDrop2)
+        }
+    }
+    const toggler2 = () => {
+        if(isDrop2===false){
+        setIsDrop2(!isDrop2);
+        setIsDrop(!isDrop)
+        }
+    }
+
+   
 
     if (loading) {
         return (
@@ -42,28 +64,40 @@ export const User = () => {
                 </div>
                 <div className="ml-20">
                     <nav className="flex space-x-4 border-b mx-32 px-10 mb-4 w-screen max-w-screen-lg">
-                        <div className="py-2 pt-10 px-4 border-b-2 border-black">Home</div>
-                        <div className="py-2 pt-10 px-4 text-gray-500 hover:text-black">About</div>
+                        <div className={`py-2 pt-10 px-4 ${isDrop ?  "border-b-2 border-black": ""} cursor-pointer`} onClick={toggler1}>Home</div>
+                        <div className={`py-2 pt-10 px-4 text-gray-500 ${isDrop2 ?  "border-b-2 border-black": ""} hover:text-black cursor-pointer`} onClick={toggler2}>About</div>
                     </nav>
                 </div>
-                <div className="flex justify-center">
-                    <div>
-                        {blogs.length > 0 ? (
-                            blogs.map(blog => (
-                                <BlogCard 
-                                    key={blog.id} // Add key for each blog card
-                                    id={blog.id}
-                                    authorName={blog.author.name || "Anonymous"}
-                                    title={blog.title}
-                                    content={blog.content}
-                                    publishedDate={"2nd Feb 2024"} // Consider using actual published date
-                                />
-                            ))
-                        ) : (
-                            <p>No blogs found.</p> // Handle the case of no blogs
-                        )}
+                {isDrop && (
+                    <div className="flex justify-center">
+                        <div>
+                            {blogs.length > 0 ? (
+                                blogs.map(blog => (
+                                    <BlogCard 
+                                        key={blog.id} // Add key for each blog card
+                                        id={blog.id}
+                                        authorName={blog.author.name || "Anonymous"}
+                                        title={blog.title}
+                                        content={blog.content}
+                                        publishedDate={"2nd Feb 2024"} // Consider using actual published date
+                                    />
+                                ))
+                            ) : (
+                                <p>No Blogs</p> // Handle the case of no blogs
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
+                {!isDrop && (
+                    <div>
+                        <DetailCard
+                            id={details?.id || " "}
+                            name={details?.name || "Anonymous"}
+                            email={details?.email || "No email"}
+                            password={details?.password || "No password"}
+                        />
+                    </div> 
+                )}
             </div>
         </div>
     );

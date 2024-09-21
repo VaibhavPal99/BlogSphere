@@ -7,8 +7,6 @@ interface BlogCardProps {
     id: string;
 }
 
-
-
 export const BlogCard = ({
     id,
     authorName,

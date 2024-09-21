@@ -161,9 +161,21 @@ userRouter.use("/*", async (c, next) => {
   
         }
       });
+
+      const details = await prisma.user.findUnique({
+        where: {
+          id: id,
+        },select: {
+          id: true,
+          name:true,
+          email: true,
+          password : true,
+        }
+      })
   
       return c.json({
         blogs,
+        details,
       });
     } catch (e) {
       c.status(411);
@@ -174,4 +186,4 @@ userRouter.use("/*", async (c, next) => {
 
 
   })
-  
+

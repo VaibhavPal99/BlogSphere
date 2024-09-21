@@ -11,6 +11,14 @@ export interface Blog {
     };
 }
 
+export interface Detail {
+    id : string;
+    name : string;
+    email : string;
+    password : string;
+}
+
+
 export const useBlog = ({ id }: { id: string }) => {
     const [loading, setLoading] = useState(true);
     const [blog, setBlog] = useState<Blog | null>(null); // Initialize as null
@@ -51,6 +59,7 @@ export const useBlog = ({ id }: { id: string }) => {
 export const useDetails = ({ id }: { id: string }) => {
     const [loading, setLoading] = useState(true);
     const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [details, setDetails] = useState<Detail>();
 
     useEffect(() => {
         const source = axios.CancelToken.source();
@@ -63,6 +72,7 @@ export const useDetails = ({ id }: { id: string }) => {
         })
         .then(response => {
             setBlogs(response.data.blogs); // Ensure this matches your API response structure
+            setDetails(response.data.details);
             setLoading(false);
         })
         .catch(error => {
@@ -81,7 +91,8 @@ export const useDetails = ({ id }: { id: string }) => {
 
     return {
         loading,
-        blogs
+        blogs,
+        details
     };
 };
 
