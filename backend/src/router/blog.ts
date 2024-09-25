@@ -131,6 +131,28 @@ blogRouter.get("/bulk", async (c) => {
   }
 });
 
+blogRouter.delete('/:id', async (c) => {
+
+  try{
+
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const id = c.req.param("id");
+  const deletedPost = await prisma.post.delete({
+    where: {id : id},
+  });
+
+  return c.json({ message: 'Post deleted successfully'}, 200);
+} catch (e) {
+    return c.json({ message: 'Internal Server Error' }, 500);
+  }
+
+  
+});
+
+
 blogRouter.get("/:id", async (c) => {
   try {
     const prisma = new PrismaClient({
@@ -166,5 +188,6 @@ blogRouter.get("/:id", async (c) => {
     });
   }
 });
+
 
 

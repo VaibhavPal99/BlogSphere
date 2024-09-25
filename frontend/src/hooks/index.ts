@@ -89,10 +89,15 @@ export const useDetails = ({ id }: { id: string }) => {
         };
     }, [id]);
 
+    const handleDelete = (deletedBlogId: string) => {
+        setBlogs(blogs.filter((blog) => blog.id !== deletedBlogId)); // Remove the deleted blog from the state
+    };
+
     return {
         loading,
         blogs,
-        details
+        details,
+        handleDelete
     };
 };
 
@@ -126,6 +131,8 @@ export const useBlogs = () => {
             source.cancel("Operation canceled by the user.");
         };
     }, []);
+
+  
 
     return {
         loading,

@@ -4,6 +4,7 @@ import { BlogCard } from "../components/BlogCard";
 import { Skeleton } from "../components/Skeleton";
 import { useState } from "react";
 import { DetailCard } from "../components/DetailCard";
+import { DeleteBtn } from "../components/RandomBtn";
 
 export const User = () => {
     const name = localStorage.getItem("name") || "Anonymous";
@@ -12,7 +13,7 @@ export const User = () => {
      console.log(id);
 
     // Fetch blogs and loading state using the id
-    const { blogs, details, loading } = useDetails({ id });
+    const { blogs, details, loading, handleDelete } = useDetails({ id });
     console.log(blogs);
    
 
@@ -69,10 +70,13 @@ export const User = () => {
                     </nav>
                 </div>
                 {isDrop && (
-                    <div className="flex justify-center">
-                        <div>
-                            {blogs.length > 0 ? (
-                                blogs.map(blog => (
+                <div className="flex justify-center">
+                    <div>
+                        {blogs.length > 0 ? (
+                            <>
+                                <h2 className="text-3xl font-bold mb-4 font-serif">Your Blogs </h2> {/* Add heading only if blogs exist */}
+                                {blogs.map((blog) => (
+                                <div className="flex">
                                     <BlogCard 
                                         key={blog.id} // Add key for each blog card
                                         id={blog.id}
@@ -80,14 +84,21 @@ export const User = () => {
                                         title={blog.title}
                                         content={blog.content}
                                         publishedDate={"2nd Feb 2024"} // Consider using actual published date
-                                    />
-                                ))
-                            ) : (
-                                <p>No Blogs</p> // Handle the case of no blogs
-                            )}
-                        </div>
+                                    >
+                                    </BlogCard>
+                                    <div className="pt-10">
+                                        <DeleteBtn blogId={blog.id} onDelete={handleDelete}/>
+                                    </div>
+                                </div>
+                        ))}
+                            </>
+                        ) : (
+                            <p>No Blogs</p> // Handle the case of no blogs
+                        )}
                     </div>
+                </div>
                 )}
+
                 {!isDrop && (
                     <div>
                         <DetailCard
