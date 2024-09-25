@@ -1,3 +1,112 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base Layer */
+@layer base {
+  /* Typography */
+  h1 {
+    @apply text-4xl font-bold mb-6;
+  }
+  h2 {
+    @apply text-3xl font-semibold mb-5;
+  }
+  h3 {
+    @apply text-2xl font-medium mb-4;
+  }
+  h4 {
+    @apply text-xl font-medium mb-3;
+  }
+  h5 {
+    @apply text-lg font-medium mb-2;
+  }
+  h6 {
+    @apply text-base font-medium mb-1;
+  }
+  p {
+    @apply mb-4 text-base leading-relaxed text-gray-700;
+  }
+  /* a {
+    @apply text-blue-600 hover:underline;
+  } */
+  
+  /* Lists */
+  ul {
+    @apply list-disc list-inside mb-4;
+  }
+  ol {
+    @apply list-decimal list-inside mb-4;
+  }
+  li {
+    @apply mb-1;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    @apply border-l-4 pl-4 italic text-gray-600 border-gray-300 mb-4;
+  }
+
+  /* Buttons */
+  /* button {
+    @apply px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition;
+  } */
+
+  /* Form Elements */
+  input, textarea, select {
+    @apply border border-gray-300 rounded-md p-2 mb-4 w-full;
+  }
+
+  /* Tables */
+  table {
+    @apply border-collapse w-full mb-4;
+  }
+  th {
+    @apply bg-gray-200 text-left p-2 border-b border-gray-300;
+  }
+  td {
+    @apply p-2 border-b border-gray-300;
+  }
+}
+
+/* Components Layer */
+@layer components {
+  /* Card Component */
+  .card {
+    @apply bg-white shadow-md rounded-lg p-4;
+  }
+
+  /* Button Component */
+  .btn-primary {
+    @apply bg-blue-500 text-white px-4 py-2 rounded;
+  }
+  
+  /* Alert Component */
+  .alert {
+    @apply p-4 mb-4 rounded;
+  }
+}
+
+/* Utilities Layer */
+@layer utilities {
+  /* Custom Utilities */
+  
+  
+  .margin-auto {
+    @apply mx-auto;
+  }
+  
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+ 
+
+  .inline {
+    @apply inline;
+  }
+}
+
+.custom-content h1,h2,h3 {
+  font-size: 18px; /* Adjust this value */
+}
+

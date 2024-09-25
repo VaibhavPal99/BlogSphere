@@ -14,6 +14,7 @@ export const BlogCard = ({
     content,
     publishedDate
 }: BlogCardProps) =>{
+    const Content = content.slice(0,100) + "...";
     return <Link to={`/blog/${id}`}>
         <div className="p-4 border-b pb-4 w-screen max-w-screen-md cursor-pointer">
             <div className="flex">
@@ -31,8 +32,8 @@ export const BlogCard = ({
                 {title}
             </div>
 
-            <div className="text-md font-thin">
-                {content.slice(0,100) + "..."}
+            <div className="text-sm font-thin custom-content" dangerouslySetInnerHTML={{ __html: Content }}>
+           
             </div>
             <div className="text-slate-500 text-sm font-thin pt-4">
                 {`${Math.ceil(content.length/100)} minute(s)`}
