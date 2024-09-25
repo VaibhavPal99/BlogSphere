@@ -14,7 +14,8 @@ A full-stack blogging application inspired by Medium, built using ReactJS for th
 - **Frontend**: ReactJS
 - **Backend**: NodeJS (deployed on Cloudflare Workers)
 - **Database**: PostgreSQL
-- **Deployment**: Cloudflare Workers (serverless)
+- **Backend Deployment**: Cloudflare Workers (serverless)
+- **Frontend Deployment**: Vercel
 
 - **Deployment Link**: https://medium-style-blogging-app.vercel.app
 
