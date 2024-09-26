@@ -1,5 +1,5 @@
 
-# Medium-Style Blogging App
+# BlogSphere
 
 A full-stack blogging application inspired by Medium, built using ReactJS for the front-end, NodeJS for the back-end, and PostgreSQL for database management. The back-end is deployed in a serverless fashion using Cloudflare Workers.
 
@@ -17,7 +17,7 @@ A full-stack blogging application inspired by Medium, built using ReactJS for th
 - **Backend Deployment**: Cloudflare Workers (serverless)
 - **Frontend Deployment**: Vercel
 
-- **Deployment Link**: https://medium-style-blogging-app.vercel.app
+- **Deployment Link**: https://blogsphere0.vercel.app/
 
 
 
