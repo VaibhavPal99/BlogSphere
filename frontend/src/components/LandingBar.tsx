@@ -5,7 +5,7 @@ export const LandingBar = () => {
     return <div>
          <div className="border-b flex justify-between max-w-5xl mx-auto py-4 px-6">
                 <Link to={'/'} className="flex flex-col justify-center font-semibold cursor-pointer text-3xl font-serif">
-                    Medium
+                    BlogSphere
                 </Link> 
             <div>
                     <Link className="pr-4" to={'/signin'}>

@@ -24,7 +24,7 @@ export const Appbar = () => {
         to={'/blogs'}
         className="flex flex-col justify-center font-semibold cursor-pointer text-3xl font-serif"
       >
-        Medium
+        BlogSphere
       </Link>
 
       <div className="flex">
